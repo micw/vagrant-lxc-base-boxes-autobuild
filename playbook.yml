@@ -1,6 +1,6 @@
 ---
 
-- hosts: ubuntux
+- hosts: ubuntu
   connection: local
   tasks:
   - name: create dir {{ ansible_host }}
