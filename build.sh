@@ -5,4 +5,6 @@ if [ $( whoami ) != 'root' ]; then
 	exit 1
 fi
 
+ansible-playbook --version
+
 ansible-playbook -i boxes.ini playbook.yml
