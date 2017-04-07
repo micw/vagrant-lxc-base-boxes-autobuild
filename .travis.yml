@@ -6,7 +6,5 @@ python: "3.5"
 install:
   - sudo pip install ansible
   - sudo apt-get install debootstrap
-  - ls -al /usr/share/debootstrap/scripts/
-  - sudo sudo ln -s gutsy /usr/share/debootstrap/scripts/zesty
 
 script: sudo /bin/bash build.sh
