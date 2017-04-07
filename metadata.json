@@ -1,0 +1,6 @@
+
+{
+  "provider": "lxc",
+  "version":  "1.0.0",
+  "built-on": "{{ ansible_date_time.date }} {{ ansible_date_time.time }}"
+}
