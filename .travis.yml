@@ -1,2 +1,2 @@
 sudo: true
-script: sudo ./build.sh
+script: sudo /bin/bash build.sh
