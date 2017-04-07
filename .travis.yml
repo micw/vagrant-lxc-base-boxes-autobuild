@@ -1,2 +1,9 @@
 sudo: true
+
+before_install:
+  - sudo apt-get update -qq
+
+install:
+  - sudo apt-get install ansible
+
 script: sudo /bin/bash build.sh
