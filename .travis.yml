@@ -1,2 +1,2 @@
-sudo: false
-script: ./build.sh
+sudo: true
+script: sudo ./build.sh
