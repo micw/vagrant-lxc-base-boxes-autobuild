@@ -7,6 +7,4 @@ fi
 
 ansible-playbook --version
 
-ls -al  /usr/share/debootstrap/scripts/
-
 ansible-playbook -i boxes.ini playbook.yml
