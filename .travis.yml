@@ -4,6 +4,6 @@ language: python
 python: "3.5"
 
 install:
-  - pip install ansible
+  - sudo pip install ansible
 
 script: sudo /bin/bash build.sh
