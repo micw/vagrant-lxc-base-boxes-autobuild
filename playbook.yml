@@ -8,9 +8,9 @@
 
 - include: bootstrap_debian.yml
 - include: bootstrap_ubuntu.yml
-- include: setup_debian_ubuntu.yml
-- include: bootstrap_alpine.yml
-- include: setup_alpine.yml
+#- include: setup_debian_ubuntu.yml
+#- include: bootstrap_alpine.yml
+#- include: setup_alpine.yml
 
 - hosts: all
   connection: local

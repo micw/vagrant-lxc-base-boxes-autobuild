@@ -1,6 +1,7 @@
 ---
 
 - hosts: debian
+  connection: local
   tasks:
   - name: Debootstrapping (takes a while)
     command: |

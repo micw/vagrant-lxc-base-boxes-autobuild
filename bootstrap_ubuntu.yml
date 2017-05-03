@@ -1,6 +1,7 @@
 ---
 
 - hosts: ubuntu
+  connection: local
   tasks:
   - name: Debootstrapping (takes a while)
     command: |
