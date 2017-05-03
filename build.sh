@@ -8,3 +8,5 @@ fi
 ansible-playbook --version
 
 ansible-playbook -i boxes.ini playbook.yml
+
+ls -al work/
