@@ -1,6 +1,8 @@
 ---
 
-- hosts: ubuntu
+- hosts:
+  - ubuntu
+  - debian
   connection: local
   tasks:
   - name: create dir {{ ansible_host }}
@@ -16,7 +18,9 @@
                http://archive.ubuntu.com/ubuntu
              creates={{ ansible_host }}/bin/sh
 
-- hosts: ubuntu
+- hosts:
+  - ubuntu
+  - debian
   connection: chroot
   tasks:
   - apt: name=sudo,openssh-server,ca-certificates
@@ -53,7 +57,9 @@
     - /sys
     - /dev
 
-- hosts: ubuntu
+- hosts:
+  - ubuntu
+  - debian
   connection: local
   tasks:
   - name: Packing rootfs

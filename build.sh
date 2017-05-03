@@ -7,6 +7,9 @@ fi
 
 ansible-playbook --version
 
-ansible-playbook -i boxes.ini playbook.yml
-
-ls -al work/
+if [ -z $1 ]; then
+  ansible-playbook -i boxes.ini playbook.yml
+else
+  # limit to one host type
+  ansible-playbook -i boxes.ini playbook.yml -l $1
+fi
