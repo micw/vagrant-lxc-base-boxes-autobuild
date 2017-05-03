@@ -1,8 +1,6 @@
 ---
 
-- hosts:
-  - ubuntu
-  - debian
+- hosts: ubuntu
   connection: local
   tasks:
   - name: create dir {{ ansible_host }}
@@ -16,6 +14,22 @@
                {{ CODENAME }}
                {{ ansible_host }}
                http://archive.ubuntu.com/ubuntu
+             creates={{ ansible_host }}/bin/sh
+
+- hosts: debian
+  connection: local
+  tasks:
+  - name: create dir {{ ansible_host }}
+    file: name={{ ansible_host }} state=directory
+  - name: Debootstrapping (takes a while)
+    command: |
+             debootstrap
+               --variant=minbase
+               --arch=amd64
+               --include=python-simplejson
+               {{ CODENAME }}
+               {{ ansible_host }}
+               http://deb.debian.org/debian/
              creates={{ ansible_host }}/bin/sh
 
 - hosts:
