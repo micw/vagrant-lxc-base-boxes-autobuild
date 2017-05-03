@@ -1,0 +1,14 @@
+---
+
+- hosts: ubuntu
+  tasks:
+  - name: Debootstrapping (takes a while)
+    command: |
+             debootstrap
+               --variant=minbase
+               --arch=amd64
+               --include=python-simplejson
+               {{ CODENAME }}
+               {{ ansible_host }}
+               http://archive.ubuntu.com/ubuntu
+             creates={{ ansible_host }}/bin/sh

@@ -1,0 +1,14 @@
+---
+
+- hosts: debian
+  tasks:
+  - name: Debootstrapping (takes a while)
+    command: |
+             debootstrap
+               --variant=minbase
+               --arch=amd64
+               --include=python-simplejson
+               {{ CODENAME }}
+               {{ ansible_host }}
+               http://deb.debian.org/debian/
+             creates={{ ansible_host }}/bin/sh

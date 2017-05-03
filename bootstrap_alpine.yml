@@ -1,0 +1,11 @@
+---
+
+- hosts: alpine
+  connection: local
+  tasks:
+  - get_url: url=https://nl.alpinelinux.org/alpine/v3.5/releases/x86_64/alpine-minirootfs-{{ VERSION }}-x86_64.tar.gz
+             dest=work/{{ inventory_hostname}}/alpine-minirootfs-{{ VERSION }}-x86_64.tar.gz
+  - command: tar xf work/{{ inventory_hostname}}/alpine-minirootfs-{{ VERSION }}-x86_64.tar.gz
+             -C{{ rootfs_dir }}
+             creates={{ rootfs_dir }}/bin/sh
+

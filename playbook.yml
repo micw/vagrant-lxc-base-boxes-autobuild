@@ -1,79 +1,18 @@
 ---
 
-- hosts: ubuntu
+- hosts: all
   connection: local
   tasks:
   - name: create dir {{ ansible_host }}
     file: name={{ ansible_host }} state=directory
-  - name: Debootstrapping (takes a while)
-    command: |
-             debootstrap
-               --variant=minbase
-               --arch=amd64
-               --include=python-simplejson
-               {{ CODENAME }}
-               {{ ansible_host }}
-               http://archive.ubuntu.com/ubuntu
-             creates={{ ansible_host }}/bin/sh
 
-- hosts: debian
-  connection: local
-  tasks:
-  - name: create dir {{ ansible_host }}
-    file: name={{ ansible_host }} state=directory
-  - name: Debootstrapping (takes a while)
-    command: |
-             debootstrap
-               --variant=minbase
-               --arch=amd64
-               --include=python-simplejson
-               {{ CODENAME }}
-               {{ ansible_host }}
-               http://deb.debian.org/debian/
-             creates={{ ansible_host }}/bin/sh
+- include: bootstrap_debian.yml
+- include: bootstrap_ubuntu.yml
+- include: setup_debian_ubuntu.yml
+- include: bootstrap_alpine.yml
+- include: setup_alpine.yml
 
-- hosts:
-  - ubuntu
-  - debian
-  connection: chroot
-  tasks:
-  - apt: name=sudo,openssh-server,ca-certificates
-  - apt: name=iproute,iputils-ping,net-tools
-  - apt: name=vim,curl,wget,manpages,bash-completion
-  - user:
-      name: vagrant
-      home: /home/vagrant
-      shell: /bin/bash
-  - authorized_key:
-      user: vagrant
-      key: "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"
-  - copy:
-      dest: /etc/sudoers.d/vagrant
-      content: "vagrant ALL=(ALL) NOPASSWD:ALL"
-  - copy:
-      dest: /etc/resolv.conf
-      content: "nameserver 8.8.8.8"
-  - copy:
-      dest: /etc/hosts
-      content: |
-               127.0.0.1  localhost
-               127.0.1.1  vagrant-base-box-{{ inventory_hostname }}
-  - copy:
-      dest: /etc/hostname
-      content: |
-               vagrant-base-box-{{ inventory_hostname }}
-
-  - command: apt-get clean
-  - shell: rm -rf /tmp/*
-  - file: name={{ item }} state=directory
-    with_items:
-    - /proc
-    - /sys
-    - /dev
-
-- hosts:
-  - ubuntu
-  - debian
+- hosts: all
   connection: local
   tasks:
   - name: Packing rootfs
