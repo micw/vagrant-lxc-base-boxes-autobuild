@@ -10,7 +10,7 @@ env:
  - BOX=alpine-3.5.2
 install:
   - sudo pip install ansible
-  - sudo apt-get install debootstrap,python-urllib3,python-ndg-httpsclient,python-pyasn1
+  - sudo apt-get install debootstrap python-urllib3 python-ndg-httpsclient python-pyasn1
 script: sudo /bin/bash build.sh $BOX
 deploy:
   provider: releases
