@@ -40,6 +40,11 @@
       content: |
                vagrant-base-box-{{ inventory_hostname }}
 
+  - lineinfile: name=/etc/inittab
+          regexp="^tty[56]:" state=absent
+
+  - copy: src=shutdown.sh dest=/sbin/shutdown mode=0700
+
   - file: name={{ item }} state=directory
     with_items:
     - /proc
