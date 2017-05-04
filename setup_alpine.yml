@@ -19,6 +19,8 @@
   - apk: name=sudo,openrc,openssh,rsyslog,bash,nano
   - service: name=sshd enabled=yes
   - service: name=rsyslog enabled=yes
+  - copy: src=shutdown.sh dest=/sbin/shutdown mode=0700
+  - command: chmod 0700 /sbin/shutdown
   - shell: grep /etc/passwd -e "^vagrant:" || adduser -D -h /home/vagrant -s /bin/bash vagrant vagrant
   - shell: passwd -u vagrant
   - authorized_key:
@@ -42,8 +44,6 @@
 
   - lineinfile: name=/etc/inittab
           regexp="^tty[56]:" state=absent
-
-  - copy: src=shutdown.sh dest=/sbin/shutdown mode=0700
 
   - file: name={{ item }} state=directory
     with_items:
