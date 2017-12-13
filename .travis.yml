@@ -9,6 +9,8 @@ env:
  - BOX=debian-jessie
  - BOX=debian-stretch
  - BOX=alpine-3.5.2
+ - BOX=alpine-3.6.2
+ - BOX=alpine-3.7.0
 install:
   - sudo pip install ansible
   - sudo apt-get install debootstrap python-urllib3 python-pyasn1
